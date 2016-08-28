@@ -9,7 +9,7 @@ load test_helper
   run git commit -m ''
 
   assert_failure
-  assert_line 'Aborting commit; you did not edit the message.'
+  assert_line --partial 'Aborting commit'
 }
 
 @test "validation: ignores comments" {
