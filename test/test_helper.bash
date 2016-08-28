@@ -16,7 +16,8 @@ setup() {
 
   # Set up a git repo
   cd $TMP_DIRECTORY
-  git -c "init.templatedir=" init
+  mkdir templates
+  git -c "init.templatedir=$TMP_DIRECTORY/templates" init
   git config user.email "test@git-good-commit"
   git config user.name "Git Good Commit Tests"
   echo "Foo bar" > my_file
