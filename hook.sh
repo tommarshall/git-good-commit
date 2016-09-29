@@ -4,7 +4,7 @@
 # git-good-commit(1) - Git hook to help you write good commit messages.
 # Released under the MIT License.
 #
-# Version 0.1.0
+# Version 0.2.0
 #
 # https://github.com/tommarshall/git-good-commit
 #
@@ -89,8 +89,16 @@ read_commit_msg() {
 
   # read commit message into lines array
   while IFS= read -r; do
+
+    # trim trailing spaces from commit lines
+    shopt -s extglob
+    REPLY="${REPLY%%*( )}"
+    shopt -u extglob
+
+    # ignore comments
     [[ $REPLY =~ ^# ]]
     test $? -eq 0 || COMMIT_MSG_LINES+=("$REPLY")
+
   done < <(cat $COMMIT_MSG_FILE)
 }
 
