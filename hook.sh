@@ -89,8 +89,16 @@ read_commit_msg() {
 
   # read commit message into lines array
   while IFS= read -r; do
+
+    # trim trailing spaces from commit lines
+    shopt -s extglob
+    REPLY="${REPLY%%*( )}"
+    shopt -u extglob
+
+    # ignore comments
     [[ $REPLY =~ ^# ]]
     test $? -eq 0 || COMMIT_MSG_LINES+=("$REPLY")
+
   done < <(cat $COMMIT_MSG_FILE)
 }
 
