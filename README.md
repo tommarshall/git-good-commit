@@ -65,6 +65,16 @@ n - abort commit
 ? - print help
 ```
 
+## Configuration
+
+The default colour setting is `auto`, but the hook will use `git`'s `color.ui` config setting if defined. You override the colour setting for the hook with:
+
+```
+git config --global hooks.goodcommit.color "never"
+```
+
+Supported values are `always`, `auto`, `never` and `false`.
+
 ## Dependencies
 
 None, other than Bash.
