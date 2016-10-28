@@ -27,7 +27,7 @@ Offers an interactive prompt if any of the rules are detected to be broken.
 At the root of the repository, run:
 
 ```sh
-curl https://cdn.rawgit.com/tommarshall/git-good-commit/v0.2.0/hook.sh > .git/hooks/commit-msg && chmod +x .git/hooks/commit-msg
+curl https://cdn.rawgit.com/tommarshall/git-good-commit/v0.3.0/hook.sh > .git/hooks/commit-msg && chmod +x .git/hooks/commit-msg
 ```
 
 ### Globally
@@ -37,14 +37,14 @@ To use the hook globally, you can use `git-init`'s template directory:
 ```sh
 mkdir -p ~/.git-template/hooks
 git config --global init.templatedir '~/.git-template'
-curl https://cdn.rawgit.com/tommarshall/git-good-commit/v0.2.0/hook.sh > ~/.git-template/hooks/commit-msg && chmod +x ~/.git-template/hooks/commit-msg
+curl https://cdn.rawgit.com/tommarshall/git-good-commit/v0.3.0/hook.sh > ~/.git-template/hooks/commit-msg && chmod +x ~/.git-template/hooks/commit-msg
 ```
 
 The hook will now be present after any `git init` or `git clone`. You can [safely re-run `git init`](http://stackoverflow.com/a/5149861/885540) on any existing repositories to add the hook there.
 
 ---
 
-_If you're security conscious, you may be reasonably suspicious of [curling executable files](https://www.seancassidy.me/dont-pipe-to-your-shell.html). In this case you're on HTTPS throughout, and not piping directly to execution, so you can check contents and the hash against MD5 `5addd4052346aac69dec3faad4b46261` for v0.2.0._
+_If you're security conscious, you may be reasonably suspicious of [curling executable files](https://www.seancassidy.me/dont-pipe-to-your-shell.html). In this case you're on HTTPS throughout, and not piping directly to execution, so you can check contents and the hash against MD5 `23a607325827a12482bb95a208c4a5ee` for v0.3.0._
 
 ## Usage
 
@@ -64,6 +64,16 @@ y - proceed with commit
 n - abort commit
 ? - print help
 ```
+
+## Configuration
+
+The default colour setting is `auto`, but the hook will use `git`'s `color.ui` config setting if defined. You override the colour setting for the hook with:
+
+```
+git config --global hooks.goodcommit.color "never"
+```
+
+Supported values are `always`, `auto`, `never` and `false`.
 
 ## Dependencies
 

@@ -4,7 +4,7 @@
 # git-good-commit(1) - Git hook to help you write good commit messages.
 # Released under the MIT License.
 #
-# Version 0.2.0
+# Version 0.3.0
 #
 # https://github.com/tommarshall/git-good-commit
 #
@@ -25,7 +25,7 @@ NC=
 #
 
 set_colors() {
-  local default_color=$(git config --get color.ui || echo 'auto')
+  local default_color=$(git config --get hooks.goodcommit.color || git config --get color.ui || echo 'auto')
   if [[ $default_color == 'always' ]] || [[ $default_color == 'auto' && -t 1 ]]; then
     RED='\033[1;31m'
     YELLOW='\033[1;33m'
