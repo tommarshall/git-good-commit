@@ -110,8 +110,8 @@ validate_commit_message() {
   # reset warnings
   WARNINGS=()
 
-  # capture the subject
-  COMMIT_SUBJECT=${COMMIT_MSG_LINES[0]}
+  # capture the subject, and remove the 'squash! ' prefix if present
+  COMMIT_SUBJECT=${COMMIT_MSG_LINES[0]/#squash! /}
 
   # if the commit is empty there's nothing to validate, we can return here
   COMMIT_MSG_STR="${COMMIT_MSG_LINES[*]}"
