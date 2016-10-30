@@ -110,6 +110,9 @@ validate_commit_message() {
   # reset warnings
   WARNINGS=()
 
+  # capture the subject
+  COMMIT_SUBJECT=${COMMIT_MSG_LINES[0]}
+
   # if the commit is empty there's nothing to validate, we can return here
   COMMIT_MSG_STR="${COMMIT_MSG_LINES[*]}"
   test -n "${COMMIT_MSG_STR[*]// }" || return;
@@ -123,19 +126,19 @@ validate_commit_message() {
   # 2. Limit the subject line to 50 characters
   # ------------------------------------------------------------------------------
 
-  test "${#COMMIT_MSG_LINES[0]}" -le 50
-  test $? -eq 0 || add_warning 1 "Limit the subject line to 50 characters (${#COMMIT_MSG_LINES[0]} chars)"
+  test "${#COMMIT_SUBJECT}" -le 50
+  test $? -eq 0 || add_warning 1 "Limit the subject line to 50 characters (${#COMMIT_SUBJECT} chars)"
 
   # 3. Capitalize the subject line
   # ------------------------------------------------------------------------------
 
-  [[ ${COMMIT_MSG_LINES[0]} =~ ^[[:blank:]]*([[:upper:]]{1}[[:lower:]]*|[[:digit:]]+)([[:blank:]]|[[:punct:]]|$) ]]
+  [[ ${COMMIT_SUBJECT} =~ ^[[:blank:]]*([[:upper:]]{1}[[:lower:]]*|[[:digit:]]+)([[:blank:]]|[[:punct:]]|$) ]]
   test $? -eq 0 || add_warning 1 "Capitalize the subject line"
 
   # 4. Do not end the subject line with a period
   # ------------------------------------------------------------------------------
 
-  [[ ${COMMIT_MSG_LINES[0]} =~ [^\.]$ ]]
+  [[ ${COMMIT_SUBJECT} =~ [^\.]$ ]]
   test $? -eq 0 || add_warning 1 "Do not end the subject line with a period"
 
   # 5. Use the imperative mood in the subject line
@@ -174,7 +177,7 @@ validate_commit_message() {
   shopt -s nocasematch
 
   for BLACKLISTED_WORD in "${IMPERATIVE_MOOD_BLACKLIST[@]}"; do
-    [[ ${COMMIT_MSG_LINES[0]} =~ $BLACKLISTED_WORD ]]
+    [[ ${COMMIT_SUBJECT} =~ $BLACKLISTED_WORD ]]
     test $? -eq 0 && add_warning 1 "Use the imperative mood in the subject line, e.g 'fix' not 'fixes'" && break
   done
 
@@ -200,14 +203,14 @@ validate_commit_message() {
   # 8. Do no write single worded commits
   # ------------------------------------------------------------------------------
 
-  COMMIT_SUBJECT_WORDS=(${COMMIT_MSG_LINES[0]})
+  COMMIT_SUBJECT_WORDS=(${COMMIT_SUBJECT})
   test "${#COMMIT_SUBJECT_WORDS[@]}" -gt 1
   test $? -eq 0 || add_warning 1 "Do no write single worded commits"
 
   # 9. Do not start the subject line with whitespace
   # ------------------------------------------------------------------------------
 
-  [[ ${COMMIT_MSG_LINES[0]} =~ ^[[:blank:]]+ ]]
+  [[ ${COMMIT_SUBJECT} =~ ^[[:blank:]]+ ]]
   test $? -eq 1 || add_warning 1 "Do not start the subject line with whitespace"
 }
 
