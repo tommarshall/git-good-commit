@@ -115,7 +115,10 @@ validate_commit_message() {
 
   # if the commit is empty there's nothing to validate, we can return here
   COMMIT_MSG_STR="${COMMIT_MSG_LINES[*]}"
-  test -n "${COMMIT_MSG_STR[*]// }" || return;
+  test -z "${COMMIT_MSG_STR[*]// }" && return;
+
+  # if the commit subject starts with 'fixup! ' there's nothing to validate, we can return here
+  [[ $COMMIT_SUBJECT == 'fixup! '* ]] && return;
 
   # 1. Separate subject from body with a blank line
   # ------------------------------------------------------------------------------

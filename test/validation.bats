@@ -24,6 +24,17 @@ EOF
   assert_success
 }
 
+@test "validation: ignores commits with the fixup! autosquash flag" {
+  echo "n" > $FAKE_TTY
+  run git commit -m "$(cat <<EOF
+fixup! Add foo bar string to my_file - As requested by Jon
+Another line in the body that runs to longer than 72 characters in length
+EOF
+)"
+
+  assert_success
+}
+
 # 0. Good commits - control
 # ------------------------------------------------------------------------------
 
