@@ -4,7 +4,7 @@
 # git-good-commit(1) - Git hook to help you write good commit messages.
 # Released under the MIT License.
 #
-# Version 0.3.0
+# Version 0.4.0
 #
 # https://github.com/tommarshall/git-good-commit
 #
