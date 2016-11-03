@@ -24,6 +24,17 @@ EOF
   assert_success
 }
 
+@test "validation: ignores commits with the fixup! autosquash flag" {
+  echo "n" > $FAKE_TTY
+  run git commit -m "$(cat <<EOF
+fixup! Add foo bar string to my_file - As requested by Jon
+Another line in the body that runs to longer than 72 characters in length
+EOF
+)"
+
+  assert_success
+}
+
 # 0. Good commits - control
 # ------------------------------------------------------------------------------
 
@@ -96,6 +107,14 @@ EOF
   assert_line --partial "Limit the subject line to 50 characters (51 chars)"
 }
 
+@test "validation: ignores squash! prefix when checking subject line length" {
+  echo "n" > $FAKE_TTY
+  run git commit -m "squash! Add foo bar string to my_file - As requested by Jo"
+
+  assert_success
+  refute_line --partial "Limit the subject line to 50 characters"
+}
+
 # 3. Capitalize the subject line
 # ------------------------------------------------------------------------------
 
@@ -126,6 +145,14 @@ EOF
 @test "validation: subject line starting with a number does not show a warning" {
   echo "n" > $FAKE_TTY
   run git commit -m "5014 - Add foo bar string to my_file"
+
+  assert_success
+  refute_line --partial "Capitalize the subject line"
+}
+
+@test "validation: ignores squash! prefix when checking subject line capitalisation" {
+  echo "n" > $FAKE_TTY
+  run git commit -m "squash! Add foo bar string to my_file"
 
   assert_success
   refute_line --partial "Capitalize the subject line"

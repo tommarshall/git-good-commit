@@ -4,7 +4,7 @@
 # git-good-commit(1) - Git hook to help you write good commit messages.
 # Released under the MIT License.
 #
-# Version 0.3.0
+# Version 0.4.0
 #
 # https://github.com/tommarshall/git-good-commit
 #
@@ -110,9 +110,15 @@ validate_commit_message() {
   # reset warnings
   WARNINGS=()
 
+  # capture the subject, and remove the 'squash! ' prefix if present
+  COMMIT_SUBJECT=${COMMIT_MSG_LINES[0]/#squash! /}
+
   # if the commit is empty there's nothing to validate, we can return here
   COMMIT_MSG_STR="${COMMIT_MSG_LINES[*]}"
-  test -n "${COMMIT_MSG_STR[*]// }" || return;
+  test -z "${COMMIT_MSG_STR[*]// }" && return;
+
+  # if the commit subject starts with 'fixup! ' there's nothing to validate, we can return here
+  [[ $COMMIT_SUBJECT == 'fixup! '* ]] && return;
 
   # 1. Separate subject from body with a blank line
   # ------------------------------------------------------------------------------
@@ -123,19 +129,19 @@ validate_commit_message() {
   # 2. Limit the subject line to 50 characters
   # ------------------------------------------------------------------------------
 
-  test "${#COMMIT_MSG_LINES[0]}" -le 50
-  test $? -eq 0 || add_warning 1 "Limit the subject line to 50 characters (${#COMMIT_MSG_LINES[0]} chars)"
+  test "${#COMMIT_SUBJECT}" -le 50
+  test $? -eq 0 || add_warning 1 "Limit the subject line to 50 characters (${#COMMIT_SUBJECT} chars)"
 
   # 3. Capitalize the subject line
   # ------------------------------------------------------------------------------
 
-  [[ ${COMMIT_MSG_LINES[0]} =~ ^[[:blank:]]*([[:upper:]]{1}[[:lower:]]*|[[:digit:]]+)([[:blank:]]|[[:punct:]]|$) ]]
+  [[ ${COMMIT_SUBJECT} =~ ^[[:blank:]]*([[:upper:]]{1}[[:lower:]]*|[[:digit:]]+)([[:blank:]]|[[:punct:]]|$) ]]
   test $? -eq 0 || add_warning 1 "Capitalize the subject line"
 
   # 4. Do not end the subject line with a period
   # ------------------------------------------------------------------------------
 
-  [[ ${COMMIT_MSG_LINES[0]} =~ [^\.]$ ]]
+  [[ ${COMMIT_SUBJECT} =~ [^\.]$ ]]
   test $? -eq 0 || add_warning 1 "Do not end the subject line with a period"
 
   # 5. Use the imperative mood in the subject line
@@ -174,7 +180,7 @@ validate_commit_message() {
   shopt -s nocasematch
 
   for BLACKLISTED_WORD in "${IMPERATIVE_MOOD_BLACKLIST[@]}"; do
-    [[ ${COMMIT_MSG_LINES[0]} =~ $BLACKLISTED_WORD ]]
+    [[ ${COMMIT_SUBJECT} =~ $BLACKLISTED_WORD ]]
     test $? -eq 0 && add_warning 1 "Use the imperative mood in the subject line, e.g 'fix' not 'fixes'" && break
   done
 
@@ -200,14 +206,14 @@ validate_commit_message() {
   # 8. Do no write single worded commits
   # ------------------------------------------------------------------------------
 
-  COMMIT_SUBJECT_WORDS=(${COMMIT_MSG_LINES[0]})
+  COMMIT_SUBJECT_WORDS=(${COMMIT_SUBJECT})
   test "${#COMMIT_SUBJECT_WORDS[@]}" -gt 1
   test $? -eq 0 || add_warning 1 "Do no write single worded commits"
 
   # 9. Do not start the subject line with whitespace
   # ------------------------------------------------------------------------------
 
-  [[ ${COMMIT_MSG_LINES[0]} =~ ^[[:blank:]]+ ]]
+  [[ ${COMMIT_SUBJECT} =~ ^[[:blank:]]+ ]]
   test $? -eq 1 || add_warning 1 "Do not start the subject line with whitespace"
 }
 
