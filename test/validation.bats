@@ -172,15 +172,15 @@ EOF
 # 5. Use the imperative mood in the subject line
 # ------------------------------------------------------------------------------
 
-@test "validation: subject line with 'fixes' shows warning" {
+@test "validation: subject line starting with 'fixes' shows warning" {
   echo "n" > $FAKE_TTY
-  run git commit -m "More fixes for broken stuff"
+  run git commit -m "Fixes for broken stuff"
 
   assert_failure
   assert_line --partial "Use the imperative mood in the subject line"
 }
 
-@test "validation: subject line with 'fixed' shows warning" {
+@test "validation: subject line starting with 'fixed' shows warning" {
   echo "n" > $FAKE_TTY
   run git commit -m "Fixed bug with Y"
 
@@ -188,12 +188,20 @@ EOF
   assert_line --partial "Use the imperative mood in the subject line"
 }
 
-@test "validation: subject line with 'fixing' shows warning" {
+@test "validation: subject line starting with 'fixing' shows warning" {
   echo "n" > $FAKE_TTY
   run git commit -m "Fixing behavior of X"
 
   assert_failure
   assert_line --partial "Use the imperative mood in the subject line"
+}
+
+@test "validation: subject line in imperative mood with 'fixes' does not show warning" {
+  echo "n" > $FAKE_TTY
+  run git commit -m "Remove the temporary fixes to Y"
+
+  assert_success
+  refute_line --partial "Use the imperative mood in the subject line"
 }
 
 @test "validation: body with 'fixes', 'fixed', 'fixing' does not show warning" {
