@@ -83,7 +83,7 @@ display_warnings() {
 # Read the contents of the commit msg into an array of lines.
 #
 
-read_commit_msg() {
+read_commit_message() {
   # reset commit_msg_lines
   COMMIT_MSG_LINES=()
 
@@ -231,7 +231,7 @@ fi
 
 while true; do
 
-  read_commit_msg
+  read_commit_message
 
   validate_commit_message
 
