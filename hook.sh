@@ -11,6 +11,7 @@
 
 COMMIT_MSG_FILE="$1"
 COMMIT_MSG_LINES=
+HOOK_EDITOR=
 SKIP_DISPLAY_WARNINGS=0
 WARNINGS=
 
@@ -33,6 +34,18 @@ set_colors() {
     WHITE='\033[1;37m'
     NC='\033[0m' # No Color
   fi
+}
+
+#
+# Set the hook editor, using the same approach as git.
+#
+
+set_editor() {
+  HOOK_EDITOR=$GIT_EDITOR
+  test -z "${HOOK_EDITOR}" && HOOK_EDITOR=$(git config --get core.editor)
+  test -z "${HOOK_EDITOR}" && HOOK_EDITOR=$VISUAL
+  test -z "${HOOK_EDITOR}" && HOOK_EDITOR=$EDITOR
+  test -z "${HOOK_EDITOR}" && HOOK_EDITOR='vi'
 }
 
 #
@@ -223,6 +236,8 @@ validate_commit_message() {
 
 set_colors
 
+set_editor
+
 if tty >/dev/null 2>&1; then
   TTY=$(tty)
 else
@@ -248,7 +263,7 @@ while true; do
 
   # Check if the reply is valid
   case "$REPLY" in
-    E*|e*) $EDITOR "$COMMIT_MSG_FILE" < $TTY; continue ;;
+    E*|e*) $HOOK_EDITOR "$COMMIT_MSG_FILE" < $TTY; continue ;;
     Y*|y*) exit 0 ;;
     N*|n*) exit 1 ;;
     *)     SKIP_DISPLAY_WARNINGS=1; prompt_help; continue ;;
