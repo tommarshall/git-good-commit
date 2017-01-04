@@ -27,7 +27,7 @@ Offers an interactive prompt if any of the rules are detected to be broken.
 At the root of the repository, run:
 
 ```sh
-curl https://cdn.rawgit.com/tommarshall/git-good-commit/v0.6.0/hook.sh > .git/hooks/commit-msg && chmod +x .git/hooks/commit-msg
+curl https://cdn.rawgit.com/tommarshall/git-good-commit/v0.6.1/hook.sh > .git/hooks/commit-msg && chmod +x .git/hooks/commit-msg
 ```
 
 ### Globally
@@ -37,14 +37,14 @@ To use the hook globally, you can use `git-init`'s template directory:
 ```sh
 mkdir -p ~/.git-template/hooks
 git config --global init.templatedir '~/.git-template'
-curl https://cdn.rawgit.com/tommarshall/git-good-commit/v0.6.0/hook.sh > ~/.git-template/hooks/commit-msg && chmod +x ~/.git-template/hooks/commit-msg
+curl https://cdn.rawgit.com/tommarshall/git-good-commit/v0.6.1/hook.sh > ~/.git-template/hooks/commit-msg && chmod +x ~/.git-template/hooks/commit-msg
 ```
 
 The hook will now be present after any `git init` or `git clone`. You can [safely re-run `git init`](http://stackoverflow.com/a/5149861/885540) on any existing repositories to add the hook there.
 
 ---
 
-_If you're security conscious, you may be reasonably suspicious of [curling executable files](https://www.seancassidy.me/dont-pipe-to-your-shell.html). In this case you're on HTTPS throughout, and not piping directly to execution, so you can check contents and the hash against MD5 `35abc987d3267fbe578d5ff6cca261ee` for v0.6.0._
+_If you're security conscious, you may be reasonably suspicious of [curling executable files](https://www.seancassidy.me/dont-pipe-to-your-shell.html). In this case you're on HTTPS throughout, and not piping directly to execution, so you can check contents and the hash against MD5 `12fd3b8829eead2eff9a72598cbc9f4b` for v0.6.1._
 
 ## Usage
 
