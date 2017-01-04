@@ -41,7 +41,10 @@ set_colors() {
 #
 
 set_editor() {
-  HOOK_EDITOR=$GIT_EDITOR
+  # $GIT_EDITOR appears to always be set to `:` when the hook is executed by Git?
+  # ref: http://stackoverflow.com/q/41468839/885540
+  # ref: https://github.com/tommarshall/git-good-commit/issues/11
+  # HOOK_EDITOR=$GIT_EDITOR
   test -z "${HOOK_EDITOR}" && HOOK_EDITOR=$(git config --get core.editor)
   test -z "${HOOK_EDITOR}" && HOOK_EDITOR=$VISUAL
   test -z "${HOOK_EDITOR}" && HOOK_EDITOR=$EDITOR
