@@ -165,8 +165,8 @@ validate_commit_message() {
 
   IMPERATIVE_MOOD_BLACKLIST=(
     added          adds          adding
-    avoided        avoids        avoiding
     amended        amends        amending
+    avoided        avoids        avoiding
     bumped         bumps         bumping
     changed        changes       changing
     checked        checks        checking
