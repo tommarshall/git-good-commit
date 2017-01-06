@@ -175,6 +175,8 @@ validate_commit_message() {
     corrected      corrects      correcting
     created        creates       creating
     deleted        deletes       deleting
+    disabled       disables      disabling
+    enabled        enables       enabling
     fixed          fixes         fixing
     implemented    implements    implementing
     improved       improves      improving
