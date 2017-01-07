@@ -174,12 +174,14 @@ validate_commit_message() {
     copied         copies        copying
     corrected      corrects      correcting
     created        creates       creating
+    decreased      decreases     decreasing
     deleted        deletes       deleting
     disabled       disables      disabling
     enabled        enables       enabling
     fixed          fixes         fixing
     implemented    implements    implementing
     improved       improves      improving
+    increased      increases     increasing
     introduced     introduces    introducing
     moved          moves         moving
     pruned         prunes        pruning
