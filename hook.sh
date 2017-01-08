@@ -178,9 +178,11 @@ validate_commit_message() {
     deleted        deletes       deleting
     disabled       disables      disabling
     enabled        enables       enabling
+    excluded       excludes      excluding
     fixed          fixes         fixing
     implemented    implements    implementing
     improved       improves      improving
+    included       includes      including
     increased      increases     increasing
     introduced     introduces    introducing
     moved          moves         moving
