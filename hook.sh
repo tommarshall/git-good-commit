@@ -185,6 +185,7 @@ validate_commit_message() {
     included       includes      including
     increased      increases     increasing
     introduced     introduces    introducing
+    merged         merges        merging
     moved          moves         moving
     pruned         prunes        pruning
     refactored     refactors     refactoring
@@ -192,6 +193,7 @@ validate_commit_message() {
     renamed        renames       renaming
     replaced       replaces      replacing
     resolved       resolves      resolving
+    reverted       reverts       reverting
     showed         shows         showing
     tested         tests         testing
     updated        updates       updating
