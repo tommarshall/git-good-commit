@@ -178,6 +178,7 @@ validate_commit_message() {
     decreased      decreases     decreasing
     deleted        deletes       deleting
     disabled       disables      disabling
+    dropped        drops         dropping
     enabled        enables       enabling
     excluded       excludes      excluding
     fixed          fixes         fixing
