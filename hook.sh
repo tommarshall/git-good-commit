@@ -198,6 +198,7 @@ validate_commit_message() {
     reverted       reverts       reverting
     showed         shows         showing
     tested         tests         testing
+    tidied         tidies        tidying
     updated        updates       updating
     used           uses          using
   )
