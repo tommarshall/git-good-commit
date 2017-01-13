@@ -186,6 +186,7 @@ validate_commit_message() {
     improved       improves      improving
     included       includes      including
     increased      increases     increasing
+    installed      installs      installing
     introduced     introduces    introducing
     merged         merges        merging
     moved          moves         moving
