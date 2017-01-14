@@ -182,6 +182,7 @@ validate_commit_message() {
     enabled        enables       enabling
     excluded       excludes      excluding
     fixed          fixes         fixing
+    handled        handles       handling
     implemented    implements    implementing
     improved       improves      improving
     included       includes      including
