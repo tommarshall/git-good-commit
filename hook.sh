@@ -165,8 +165,9 @@ validate_commit_message() {
 
   IMPERATIVE_MOOD_BLACKLIST=(
     added          adds          adding
-    avoided        avoids        avoiding
+    adjusted       adjusts       adjusting
     amended        amends        amending
+    avoided        avoids        avoiding
     bumped         bumps         bumping
     changed        changes       changing
     checked        checks        checking
@@ -174,11 +175,21 @@ validate_commit_message() {
     copied         copies        copying
     corrected      corrects      correcting
     created        creates       creating
+    decreased      decreases     decreasing
     deleted        deletes       deleting
+    disabled       disables      disabling
+    dropped        drops         dropping
+    enabled        enables       enabling
+    excluded       excludes      excluding
     fixed          fixes         fixing
+    handled        handles       handling
     implemented    implements    implementing
     improved       improves      improving
+    included       includes      including
+    increased      increases     increasing
+    installed      installs      installing
     introduced     introduces    introducing
+    merged         merges        merging
     moved          moves         moving
     pruned         prunes        pruning
     refactored     refactors     refactoring
@@ -186,8 +197,10 @@ validate_commit_message() {
     renamed        renames       renaming
     replaced       replaces      replacing
     resolved       resolves      resolving
+    reverted       reverts       reverting
     showed         shows         showing
     tested         tests         testing
+    tidied         tidies        tidying
     updated        updates       updating
     used           uses          using
   )
