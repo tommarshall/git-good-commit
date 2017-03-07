@@ -179,6 +179,7 @@ validate_commit_message() {
     deleted        deletes       deleting
     disabled       disables      disabling
     dropped        drops         dropping
+    duplicated     duplicates    duplicating
     enabled        enables       enabling
     excluded       excludes      excluding
     fixed          fixes         fixing
