@@ -194,6 +194,7 @@ validate_commit_message() {
     moved          moves         moving
     pruned         prunes        pruning
     refactored     refactors     refactoring
+    released       releases      releasing
     removed        removes       removing
     renamed        renames       renaming
     replaced       replaces      replacing
