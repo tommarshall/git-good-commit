@@ -192,6 +192,7 @@ validate_commit_message() {
     introduced     introduces    introducing
     merged         merges        merging
     moved          moves         moving
+    passed         passes        passing
     pruned         prunes        pruning
     refactored     refactors     refactoring
     released       releases      releasing
