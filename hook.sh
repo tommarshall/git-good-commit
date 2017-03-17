@@ -202,6 +202,7 @@ validate_commit_message() {
     replaced       replaces      replacing
     resolved       resolves      resolving
     reverted       reverts       reverting
+                   sets          setting
     showed         shows         showing
     tested         tests         testing
     tidied         tidies        tidying
