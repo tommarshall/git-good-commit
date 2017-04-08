@@ -204,6 +204,7 @@ validate_commit_message() {
     reverted       reverts       reverting
                    sets          setting
     showed         shows         showing
+    swapped        swaps         swapping
     tested         tests         testing
     tidied         tidies        tidying
     updated        updates       updating
