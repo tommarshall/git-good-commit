@@ -208,6 +208,7 @@ validate_commit_message() {
     tested         tests         testing
     tidied         tidies        tidying
     updated        updates       updating
+    upped          ups           upping
     used           uses          using
   )
 
