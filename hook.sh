@@ -190,6 +190,7 @@ validate_commit_message() {
     increased      increases     increasing
     installed      installs      installing
     introduced     introduces    introducing
+    leased         leases        leasing
     merged         merges        merging
     moved          moves         moving
     passed         passes        passing
