@@ -87,10 +87,10 @@ display_warnings() {
   fi
 
   for i in "${!WARNINGS[@]}"; do
-    printf "%-74s ${WHITE}%s${NC}\n" "${COMMIT_MSG_LINES[$(($i-1))]}" "[line ${i}]"
+    >&2 printf "%-74s ${WHITE}%s${NC}\n" "${COMMIT_MSG_LINES[$(($i-1))]}" "[line ${i}]"
     IFS=';' read -ra WARNINGS_ARRAY <<< "${WARNINGS[$i]}"
     for ERROR in "${WARNINGS_ARRAY[@]}"; do
-      echo -e " ${YELLOW}- ${ERROR}${NC}"
+      >&2 echo -e " ${YELLOW}- ${ERROR}${NC}"
     done
   done
 }
@@ -279,8 +279,8 @@ while true; do
 
   display_warnings
 
-  case "$-" in
-    *i*)
+  if [ -t 1 ] || [ ! -z ${FAKE_TTY+x} ]; then
+
       # Ask the question (not using "read -p" as it uses stderr not stdout)
       echo -en "${BLUE}Proceed with commit? [e/y/n/?] ${NC}"
 
@@ -294,10 +294,10 @@ while true; do
         N*|n*) exit 1 ;;
         *)     SKIP_DISPLAY_WARNINGS=1; prompt_help; continue ;;
       esac
-      ;;
 
-    *)	exit 1 ;;
-  esac
+  else
+    exit 1
+  fi
 
 
 done
