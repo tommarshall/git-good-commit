@@ -279,18 +279,25 @@ while true; do
 
   display_warnings
 
-  # Ask the question (not using "read -p" as it uses stderr not stdout)
-  echo -en "${BLUE}Proceed with commit? [e/y/n/?] ${NC}"
+  case "$-" in
+    *i*)
+      # Ask the question (not using "read -p" as it uses stderr not stdout)
+      echo -en "${BLUE}Proceed with commit? [e/y/n/?] ${NC}"
 
-  # Read the answer
-  read REPLY < "$TTY"
+      # Read the answer
+      read REPLY < "$TTY"
 
-  # Check if the reply is valid
-  case "$REPLY" in
-    E*|e*) $HOOK_EDITOR "$COMMIT_MSG_FILE" < $TTY; continue ;;
-    Y*|y*) exit 0 ;;
-    N*|n*) exit 1 ;;
-    *)     SKIP_DISPLAY_WARNINGS=1; prompt_help; continue ;;
+      # Check if the reply is valid
+      case "$REPLY" in
+        E*|e*) $HOOK_EDITOR "$COMMIT_MSG_FILE" < $TTY; continue ;;
+        Y*|y*) exit 0 ;;
+        N*|n*) exit 1 ;;
+        *)     SKIP_DISPLAY_WARNINGS=1; prompt_help; continue ;;
+      esac
+      ;;
+
+    *)	exit 1 ;;
   esac
+
 
 done
