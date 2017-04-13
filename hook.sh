@@ -194,6 +194,7 @@ validate_commit_message() {
     merged         merges        merging
     moved          moves         moving
     passed         passes        passing
+    pointed        points        pointing
     pruned         prunes        pruning
     ran            runs          running
     refactored     refactors     refactoring
