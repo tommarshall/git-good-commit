@@ -192,6 +192,7 @@ validate_commit_message() {
     installed      installs      installing
     introduced     introduces    introducing
     leased         leases        leasing
+    managed        manages       managing
     merged         merges        merging
     moved          moves         moving
     passed         passes        passing
