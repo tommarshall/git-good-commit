@@ -182,6 +182,7 @@ validate_commit_message() {
     dropped        drops         dropping
     duplicated     duplicates    duplicating
     enabled        enables       enabling
+    enhanced       enhances      enhancing
     excluded       excludes      excluding
     fixed          fixes         fixing
     handled        handles       handling
