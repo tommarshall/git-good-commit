@@ -196,6 +196,7 @@ validate_commit_message() {
     managed        manages       managing
     merged         merges        merging
     moved          moves         moving
+    normalised     normalises    normalising
     passed         passes        passing
     pointed        points        pointing
     pruned         prunes        pruning
