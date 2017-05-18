@@ -284,6 +284,11 @@ while true; do
 
   display_warnings
 
+  # if non-interactive don't prompt and exit with an error
+  if [ ! -t 1 ] && [ -z ${FAKE_TTY+x} ]; then
+    exit 1
+  fi
+
   # Ask the question (not using "read -p" as it uses stderr not stdout)
   echo -en "${BLUE}Proceed with commit? [e/y/n/?] ${NC}"
 
