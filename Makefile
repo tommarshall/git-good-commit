@@ -1,3 +1,5 @@
+CURDIR:=$(shell pwd)
+
 setup:
 	@rm -rf vendor
 	@mkdir -p vendor
@@ -7,5 +9,13 @@ setup:
 
 test:
 	vendor/bats/bin/bats test
+
+install:
+	mkdir -p ~/.git-template/hooks
+	git config --global init.templatedir '~/.git-template'
+	cp -f hook.sh ~/.git-template/hooks/commit-msg
+
+repair:
+	find ~/.old/ -name .git -type d -prune | xargs -I '{}' sh -c "[ ! -f '{}/hooks/commit-msg' ] && ln -s -f $(CURDIR)/hook.sh '{}/hooks/commit-msg' || true;"
 
 .PHONY: setup test
