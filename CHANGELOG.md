@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 * Add multiple verbs to the imperative mood blacklist.
 
+### Fixed
+
+* Avoid hanging when run non-interactively.
+
 ## [v0.6.1] - 2017-01-04
 
 ### Fixed
