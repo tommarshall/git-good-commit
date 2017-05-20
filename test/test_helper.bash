@@ -12,7 +12,7 @@ TMP_DIRECTORY=$(mktemp -d)
 
 setup() {
   # Clear initial TTY input
-  echo "" > $FAKE_TTY
+  > $FAKE_TTY
 
   # Set up a git repo
   cd $TMP_DIRECTORY
