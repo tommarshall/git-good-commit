@@ -22,8 +22,8 @@ setup() {
   git config user.name "Git Good Commit Tests"
   echo "Foo bar" > my_file
   git add my_file
-  mkdir -p ./.git/hooks
-  cp "$BASE_DIR/hook.sh" ./.git/hooks/commit-msg
+  mkdir -p .git/hooks
+  cp "$BASE_DIR/hook.sh" .git/hooks/commit-msg
 }
 
 teardown() {
