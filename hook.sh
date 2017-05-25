@@ -111,6 +111,10 @@ read_commit_message() {
     REPLY="${REPLY%%*( )}"
     shopt -u extglob
 
+    # ignore all lines after cut line
+    [[ $REPLY == "# ------------------------ >8 ------------------------" ]]
+    test $? -eq 1 || break
+
     # ignore comments
     [[ $REPLY =~ ^# ]]
     test $? -eq 0 || COMMIT_MSG_LINES+=("$REPLY")
