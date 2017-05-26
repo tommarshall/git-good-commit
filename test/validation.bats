@@ -35,6 +35,20 @@ EOF
   assert_success
 }
 
+@test "validation: ignores lines after the verbose cut line" {
+  echo "n" > $FAKE_TTY
+  run git commit -m "$(cat <<EOF
+Add foo bar string to my_file
+
+# ------------------------ >8 ------------------------
+A line in the body that runs to longer than 72 characters after the verbose cut line
+EOF
+)"
+
+  assert_success
+}
+
+
 # 0. Good commits - control
 # ------------------------------------------------------------------------------
 
