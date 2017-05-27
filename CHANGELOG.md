@@ -12,7 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 
-* Avoid hanging when run non-interactively.
+* Avoid hanging when run non-interactively (@ssbarnea).
 
 ## [v0.6.1] - 2017-01-04
 
