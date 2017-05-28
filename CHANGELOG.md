@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Fixed
 
 * Avoid hanging when run non-interactively (@ssbarnea).
+* Avoid validating lines after the verbose cut line marker (@walle).
 
 ## [v0.6.1] - 2017-01-04
 
