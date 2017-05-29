@@ -201,6 +201,7 @@ validate_commit_message() {
     merged         merges        merging
     moved          moves         moving
     normalised     normalises    normalising
+    normalized     normalizes    normalizing
     passed         passes        passing
     pointed        points        pointing
     pruned         prunes        pruning
