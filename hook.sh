@@ -290,6 +290,12 @@ while true; do
 
   display_warnings
 
+  # warnings as errors
+  warningsaserrors=$(git config --get hooks.goodcommit.warningsaserrors || echo 'false')  
+  if [ "$warningsaserrors" == "true" ]; then   
+    exit 1
+  fi
+
   # if non-interactive don't prompt and exit with an error
   if [ ! -t 1 ] && [ -z ${FAKE_TTY+x} ]; then
     exit 1
