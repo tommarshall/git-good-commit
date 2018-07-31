@@ -238,7 +238,7 @@ validate_commit_message() {
   # 6. Wrap the body at 72 characters
   # ------------------------------------------------------------------------------
 
-  URL_REGEX='^[[:blank:]]*(https?|ftp|file)://[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]'
+  URL_REGEX='^[[:blank:]]*(https?|ftp|file|wss?|git|ssh|data|irc|dat)://[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]'
 
   for i in "${!COMMIT_MSG_LINES[@]}"; do
     LINE_NUMBER=$((i+1))
