@@ -123,7 +123,7 @@ read_commit_message() {
 }
 
 #
-# Validate the contents of the commmit msg agains the good commit guidelines.
+# Validate the contents of the commmit msg against the good commit guidelines.
 #
 
 validate_commit_message() {
