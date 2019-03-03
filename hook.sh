@@ -115,6 +115,12 @@ read_commit_message() {
     [[ $REPLY == "# ------------------------ >8 ------------------------" ]]
     test $? -eq 1 || break
 
+    # look for an explicit
+    # gcc: y
+    # flag in the comment section of COMMIT_MSG
+    [[ $REPLY =~ ^#[[:blank:]]*ggc:[[:blank:]]*y ]]
+    test $? -eq 0 && GGC_YES=1
+
     # ignore comments
     [[ $REPLY =~ ^# ]]
     test $? -eq 0 || COMMIT_MSG_LINES+=("$REPLY")
@@ -283,12 +289,22 @@ while true; do
 
   read_commit_message
 
+  # If there is a comment explicitly forcing ggc to commit
+  test $GGC_YES -eq 1 && exit 0;
+
   validate_commit_message
 
   # if there are no WARNINGS are empty then we're good to break out of here
   test ${#WARNINGS[@]} -eq 0 && exit 0;
 
   display_warnings
+
+  if [[ -n $INSIDE_EMACS ]]; then
+      echo "Change the commit-msg or write"
+      echo "# ggc: y"
+      echo "in the comment area of the message to force this commit"
+      exit 1  # if not interactive terminal, exit with error message
+  fi
 
   # if non-interactive don't prompt and exit with an error
   if [ ! -t 1 ] && [ -z ${FAKE_TTY+x} ]; then
