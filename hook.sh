@@ -296,7 +296,7 @@ while true; do
   fi
 
   # Ask the question (not using "read -p" as it uses stderr not stdout)
-  echo -en "${BLUE}Proceed with commit? [e/y/n/?] ${NC}"
+  echo -en "${BLUE}Would you like to commit anyway? [e/y/n/?] ${NC}"
 
   # Read the answer
   read REPLY < "$TTY"
