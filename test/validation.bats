@@ -258,7 +258,7 @@ EOF
   run git commit -m "$(cat <<EOF
 Add foo bar string to my_file
 
- - Added string direcly to avoid issues with X, ref:
+ - Added string directly to avoid issues with X, ref:
    http://www.example.com/a-link-to-a-relevant-article-or-issue-or-discussion-thread
 
 Fixes: #Y.
