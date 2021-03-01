@@ -84,4 +84,4 @@ None, other than Bash.
 * http://chris.beams.io/posts/git-commit
 * http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
 * https://www.git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Commit-Guidelines
-* Tim Perry's excellent [git-confim](https://github.com/pimterry/git-confirm) hook, which provided the inspiration and much of the scaffolding for this hook.
+* Tim Perry's excellent [git-confirm](https://github.com/pimterry/git-confirm) hook, which provided the inspiration and much of the scaffolding for this hook.
