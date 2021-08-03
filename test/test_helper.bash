@@ -20,6 +20,7 @@ setup() {
   git -c "init.templatedir=$TMP_DIRECTORY/templates" init
   git config user.email "test@git-good-commit"
   git config user.name "Git Good Commit Tests"
+  git config core.hooksPath '.git/hooks'
   echo "Foo bar" > my_file
   git add my_file
   mkdir -p .git/hooks
