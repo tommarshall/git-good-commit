@@ -95,6 +95,31 @@ EOF
   assert_success
 }
 
+
+@test "validation: auto generated trailers does not show warnings" {
+  echo "n" > $FAKE_TTY
+  run git commit -m "$(cat <<EOF
+Summarize change in around 50 characters or less
+
+More detailed explanatory text, if necessary. Wrap it to about 72
+characters or so. In some contexts, the first line is treated as the
+subject of the commit and the rest of the text as the body. The
+blank line separating the summary from the body is critical (unless
+you omit the body entirely); various tools like `log`, `shortlog`
+and `rebase` can get confused if you run the two together.
+
+
+Bug: 123
+See-also: HEAD
+Co-Authored-by: John Doe <john@doe.com>
+Acked-by: Jane Doe <jane@doe.com>
+Reference-to: f000e67 (Merge pull request #2 from tommarshall/ignore-trailing-whitespace, 2016-09-29)
+See-also: f000e679cfe3ac (Merge pull request #2 from tommarshall/ignore-trailing-whitespace)
+EOF
+)"
+
+  assert_success
+}
 # 1. Separate subject from body with a blank line
 # ------------------------------------------------------------------------------
 
