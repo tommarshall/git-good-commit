@@ -37,6 +37,88 @@ set_colors() {
 }
 
 #
+# Build regex for detecting commit trailers
+#
+
+build_commit_trailer_regex() {
+  local -a keys specials standalones trailers
+  local _ each key seperators
+  seperators=$(git config --get trailer.separators || echo ':')
+  trailers=(
+    'Acked-by'       'Bug'            'CC'
+    'Change-Id'      'Closes'         'Closes-Bug'
+    'Co-Authored-By' 'Implements'     'Partial-Bug'
+    'Related-Bug'    'Reported-by'    'Reviewed-by'
+    'Signed-off-by'  'Suggested-by'   'Tested-by'
+    'Thanks'
+  )
+  standalones=(
+    '(Doc|Upgrade|Security)Impact'
+    "Git-Dch[$seperators] (Ignore|Short|Full)"
+  )
+
+  # read custom trailers
+  while read -r _ key;do
+    for each in "${trailers[@]}" "${specials[@]}";do
+      test "$key" = "$each" && continue 2
+    done
+    if [[ $key =~ [$seperators]$ ]];then
+      specials+=("$key")
+    else
+      trailers+=("$key")
+    fi
+  done < <(git config --get-regexp 'trailer.*.key')
+
+  # read custom trailer keys
+  while IFS=. read -r _ key _;do
+    for each in "${keys[@]}";do
+      test "$key" = "$each" && continue 2
+    done
+    keys+=("$key")
+  done < <(git config --get-regexp 'trailer.*.key')
+
+  # start
+  TRAILER_REGEX='^('
+
+  # trailers
+  if ((${#trailers[@]}>0));then
+    TRAILER_REGEX+='(('
+    for each in "${trailers[@]}";do
+      TRAILER_REGEX+="$each|"
+    done
+    TRAILER_REGEX="${TRAILER_REGEX%|*})[$seperators][[:blank:]]*)"
+  fi
+  if ((${#standalones[@]}>0));then
+    TRAILER_REGEX+='|(('
+    for each in "${standalones[@]}";do
+      TRAILER_REGEX+="$each|"
+    done
+    TRAILER_REGEX="${TRAILER_REGEX%|*})$)"
+  fi
+
+  # specials
+  if ((${#specials[@]}>0));then
+    TRAILER_REGEX+='|('
+    for each in "${specials[@]}";do
+      TRAILER_REGEX+="$each|"
+    done
+    TRAILER_REGEX="${TRAILER_REGEX%|*})"
+  fi
+
+  # keys
+  if ((${#keys[@]}>0));then
+    TRAILER_REGEX+='|(('
+    for each in "${keys[@]}";do
+      TRAILER_REGEX+="$each|"
+    done
+    TRAILER_REGEX="${TRAILER_REGEX%|*})[${seperators:1:1}[:blank:]])"
+  fi
+
+  # end
+  TRAILER_REGEX+=")"
+}
+
+#
 # Set the hook editor, using the same approach as git.
 #
 
@@ -242,7 +324,7 @@ validate_commit_message() {
 
   for i in "${!COMMIT_MSG_LINES[@]}"; do
     LINE_NUMBER=$((i+1))
-    test "${#COMMIT_MSG_LINES[$i]}" -le 72 || [[ ${COMMIT_MSG_LINES[$i]} =~ $URL_REGEX ]]
+    test "${#COMMIT_MSG_LINES[$i]}" -le 72 || [[ ${COMMIT_MSG_LINES[$i]} =~ $URL_REGEX ]] || [[ ${COMMIT_MSG_LINES[$i]} =~ $TRAILER_REGEX ]]
     test $? -eq 0 || add_warning $LINE_NUMBER "Wrap the body at 72 characters (${#COMMIT_MSG_LINES[$i]} chars)"
   done
 
@@ -272,6 +354,8 @@ validate_commit_message() {
 set_colors
 
 set_editor
+
+build_commit_trailer_regex
 
 if tty >/dev/null 2>&1; then
   TTY=$(tty)
