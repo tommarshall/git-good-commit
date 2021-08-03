@@ -129,6 +129,28 @@ EOF
   refute_line --partial "Limit the subject line to 50 characters"
 }
 
+@test "validation: ignores tag: prefix when checking subject line length" {
+  echo "n" > $FAKE_TTY
+  run git commit -m "tag: Add foo bar string to my_file"
+
+  assert_success
+  refute_line --partial "Limit the subject line to 50 characters"
+}
+@test "validation: ignores [<tag>] prefix when checking subject line length" {
+  echo "n" > $FAKE_TTY
+  run git commit -m "[tag] Add foo bar string to my_file"
+
+  assert_success
+  refute_line --partial "Limit the subject line to 50 characters"
+}
+@test "validation: ignores {<tag>} prefix when checking subject line length" {
+  echo "n" > $FAKE_TTY
+  run git commit -m "{tag} Add foo bar string to my_file"
+
+  assert_success
+  refute_line --partial "Limit the subject line to 50 characters"
+}
+
 # 3. Capitalize the subject line
 # ------------------------------------------------------------------------------
 
