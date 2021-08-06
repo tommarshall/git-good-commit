@@ -132,7 +132,7 @@ validate_commit_message() {
 
   # capture the subject, and remove the 'squash! ', 'tag: ', '[tag] ' or '{tag} ' prefix if present
   shopt -s extglob
-  COMMIT_SUBJECT=${COMMIT_MSG_LINES[0]/#@(+([[:alnum:]])?(\(+([[:alnum:]])\)):|\[+([[:alnum:][:punct:]])\]|\{+([[:alnum:][:punct:]])\}|squash\!) /}
+  COMMIT_SUBJECT=${COMMIT_MSG_LINES[0]/#@(+([[:alnum:][:punct:]])?(\(+([[:alnum:][:punct:]])\)):|\[+([[:alnum:][:punct:]])\]|\{+([[:alnum:][:punct:]])\}|squash\!) /}
   shopt -u extglob
 
   # if the commit is empty there's nothing to validate, we can return here
