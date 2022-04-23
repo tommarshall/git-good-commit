@@ -27,7 +27,7 @@ Offers an interactive prompt if any of the rules are detected to be broken.
 At the root of the repository, run:
 
 ```sh
-curl https://cdn.rawgit.com/tommarshall/git-good-commit/v0.6.1/hook.sh > .git/hooks/commit-msg && chmod +x .git/hooks/commit-msg
+curl -L https://cdn.rawgit.com/tommarshall/git-good-commit/v0.6.1/hook.sh > .git/hooks/commit-msg && chmod +x .git/hooks/commit-msg
 ```
 
 ### Globally
@@ -37,7 +37,7 @@ To use the hook globally, you can use `git-init`'s template directory:
 ```sh
 mkdir -p ~/.git-template/hooks
 git config --global init.templatedir '~/.git-template'
-curl https://cdn.rawgit.com/tommarshall/git-good-commit/v0.6.1/hook.sh > ~/.git-template/hooks/commit-msg && chmod +x ~/.git-template/hooks/commit-msg
+curl -L https://cdn.rawgit.com/tommarshall/git-good-commit/v0.6.1/hook.sh > ~/.git-template/hooks/commit-msg && chmod +x ~/.git-template/hooks/commit-msg
 ```
 
 The hook will now be present after any `git init` or `git clone`. You can [safely re-run `git init`](http://stackoverflow.com/a/5149861/885540) on any existing repositories to add the hook there.
