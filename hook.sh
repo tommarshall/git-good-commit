@@ -155,8 +155,12 @@ validate_commit_message() {
   # 3. Capitalize the subject line
   # ------------------------------------------------------------------------------
 
-  [[ ${COMMIT_SUBJECT} =~ ^[[:blank:]]*([[:upper:]]{1}[[:lower:]]*|[[:digit:]]+)([[:blank:]]|[[:punct:]]|$) ]]
-  test $? -eq 0 || add_warning 1 "Capitalize the subject line"
+  SUBJECT_AFTER_PREFIX=${COMMIT_SUBJECT}
+  if [[ ${COMMIT_SUBJECT} =~ ^[[:blank:]]*[[:alpha:]]+('('[^')']*')')?:[[:blank:]]*(.*) ]]; then
+    SUBJECT_AFTER_PREFIX=${BASH_REMATCH[2]}
+  fi
+  [[ ${SUBJECT_AFTER_PREFIX} =~ ^[[:blank:]]*([[:upper:]]{1}[[:lower:]]*|[[:digit:]]+)([[:blank:]]|[[:punct:]]|$) ]]
+  test $? -eq 0 || add_warning 1 "Capitalize the subject line (after prefix)"
 
   # 4. Do not end the subject line with a period
   # ------------------------------------------------------------------------------
