@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [v0.7.0] - 2026-08-26
 
 ### Added
 
@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 * Avoid hanging when run non-interactively (@ssbarnea).
 * Avoid validating lines after the verbose cut line marker (@walle).
+* Improve the URL pattern so long URLs in the body aren't flagged for length.
 
 ## [v0.6.1] - 2017-01-04
 
@@ -57,7 +58,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 * Initial version.
 
-[Unreleased]: https://github.com/tommarshall/git-good-commit/compare/v0.6.1...HEAD
+[v0.7.0]: https://github.com/tommarshall/git-good-commit/compare/v0.6.1...v0.7.0
 [v0.6.1]: https://github.com/tommarshall/git-good-commit/compare/v0.6.0...v0.6.1
 [v0.6.0]: https://github.com/tommarshall/git-good-commit/compare/v0.5.0...v0.6.0
 [v0.5.0]: https://github.com/tommarshall/git-good-commit/compare/v0.4.0...v0.5.0
