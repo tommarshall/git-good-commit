@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 * Document installing globally via `core.hooksPath`.
 
+### Changed
+
+* Move continuous integration from Travis CI to GitHub Actions.
+
 ## [v0.7.0] - 2026-08-26
 
 ### Added

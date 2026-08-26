@@ -1,6 +1,6 @@
 # git-good-commit
 
-[![Build Status](https://travis-ci.org/tommarshall/git-good-commit.svg?branch=master)](https://travis-ci.org/tommarshall/git-good-commit)
+[![CI](https://github.com/tommarshall/git-good-commit/actions/workflows/ci.yml/badge.svg)](https://github.com/tommarshall/git-good-commit/actions/workflows/ci.yml)
 
 Git hook to help you write good commit messages.
 
