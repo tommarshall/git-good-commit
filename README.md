@@ -42,6 +42,18 @@ curl -L https://raw.githubusercontent.com/tommarshall/git-good-commit/v0.7.0/hoo
 
 The hook will now be present after any `git init` or `git clone`. You can [safely re-run `git init`](http://stackoverflow.com/a/5149861/885540) on any existing repositories to add the hook there.
 
+#### Alternative: a single global hook
+
+Alternatively, [`core.hooksPath`](https://git-scm.com/docs/githooks) (Git 2.9+) points every repository at one shared hooks directory, so there's only a single copy to maintain:
+
+```sh
+mkdir -p ~/.git-hooks
+curl -L https://raw.githubusercontent.com/tommarshall/git-good-commit/v0.7.0/hook.sh > ~/.git-hooks/commit-msg && chmod +x ~/.git-hooks/commit-msg
+git config --global core.hooksPath ~/.git-hooks
+```
+
+Unlike the template approach, this applies to repositories you've already cloned, and updates in one place. Note that `core.hooksPath` *replaces* each repository's `.git/hooks`, so any other hooks — including those installed by tools like Husky, pre-commit or lefthook — won't run unless you also add them to `~/.git-hooks`.
+
 ---
 
 _If you're security conscious, you may be reasonably suspicious of [curling executable files](https://www.seancassidy.me/dont-pipe-to-your-shell.html). In this case you're on HTTPS throughout, and not piping directly to execution, so you can check contents and the hash against MD5 `d25310de1598dbc784539dabaf12cd51` for v0.7.0._
